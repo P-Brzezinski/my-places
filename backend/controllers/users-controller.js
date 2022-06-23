@@ -64,7 +64,7 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ place: createdUser.toObject({ getters: true }) });
+  res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
 const login = async (req, res, next) => {
@@ -86,7 +86,10 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ message: "Logged in!" });
+  res.json({
+    message: "Logged in!",
+    user: existingUser.toObject({ getters: true }),
+  });
 };
 
 exports.getUsers = getUsers;
