@@ -1,5 +1,5 @@
 const fs = require("fs");
-const path = require('path')
+const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/uploads/images', express.static(path.join('uploads', 'images')))
+app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -49,7 +49,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "[MONGODB_KEY_HERE]"
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.9zapx.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(5000);
